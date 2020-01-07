@@ -13,9 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
 from django.urls import path
+# . == this directory
+from . import views
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # create views.py to send back information
+    # if someone doesn't give us anything ('') after the homepage, we want to send them to views.home
+    path('', views.home),
+    # best practice to put trailing slash at the end of path
+    path('candy/', views.candy)
 ]
