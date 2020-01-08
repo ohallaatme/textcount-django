@@ -23,20 +23,16 @@ def count(request):
     # split function takes string and splits it into list of words based on space
     word_list = full_text.split()
 
+    # Counter from collections to get count
+    word_counts = Counter(word_list)
+
     word_dictionary = {}
     """ What word appeared the most """
-    top_5_words = Counter(word_list).most_common(5)
+    word_dictionary = dict(word_counts)
 
-    # or
 
-    for word in word_list:
-        if word in word_dictionary:
-            # Increase
-            word_dictionary[word] += 1
-        else:
-            # add to the dictionary
-            word_dictionary[word] = 1
     # key=operator.itemgetter(1) is telling sorted() to look at the count
+    # sorted() method turns into list of tuples
     sorted_words = sorted(word_dictionary.items(), key=operator.itemgetter(1), reverse=True)
 
     print(full_text) # print will show up inside of terminal
