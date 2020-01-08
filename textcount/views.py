@@ -1,19 +1,48 @@
 # allows us to return information as an http response
 from django.http import HttpResponse
-
+# lets us bring in an HTML page to return
+from django.shortcuts import render
+from collections import Counter
+import operator
 
 
 # function for home page, we need to put a request in here
 # whenever someone comes looking for something on our homepage, it sends this request object
 def home(request):
     # we decide here what we are going to send back to the user, must be an http response
-    return HttpResponse("Welcome to an original Django page!")
+    # return HttpResponse("Welcome to an original Django page!")
+    # Send people to a home HTML page
+    return render(request, 'home.html')
 
-def candy(request):
-    return HttpResponse("Can't take another egg example")
+# we pass in a request to render with user information
+def count(request):
+    # to get info from a request, use request.GET with key to parameter between
+    # square brackets
+    # fulltext is the name of the textarea in home.html
+    full_text = request.GET['fulltext']
+    # split function takes string and splits it into list of words based on space
+    word_list = full_text.split()
 
+    word_dictionary = {}
+    """ What word appeared the most """
+    top_5_words = Counter(word_list).most_common(5)
+
+    # or
+
+    for word in word_list:
+        if word in word_dictionary:
+            # Increase
+            word_dictionary[word] += 1
+        else:
+            # add to the dictionary
+            word_dictionary[word] = 1
+    # key=operator.itemgetter(1) is telling sorted() to look at the count
+    sorted_words = sorted(word_dictionary.items(), key=operator.itemgetter(1), reverse=True)
+
+    print(full_text) # print will show up inside of terminal
+    # pass fulltext to count page
+    return render(request, 'count.html', {'fulltext':full_text, 'count': len(word_list),
+                                          'sortedwords': sorted_words})
 """
-
 Use templates to separate HTML code from view code
-
 """

@@ -1,0 +1,15 @@
+<h1>Text Count</h1>
+
+<!--
+
+URL to next page goes under action portion of form
+
+name in {% url % } from urls file
+
+-->
+<form action="{% url 'count'%}">
+    <textarea cols="40" rows="10" name="fulltext"></textarea>
+    <!-- br tag == line break -->
+    <br />
+    <input type="submit" value="Count!" /> <!-- if you don't have anything to put between tags can self close! -->
+</form>

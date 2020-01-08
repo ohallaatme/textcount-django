@@ -1,5 +1,4 @@
 """textcount URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
 Examples:
@@ -24,5 +23,6 @@ urlpatterns = [
     # if someone doesn't give us anything ('') after the homepage, we want to send them to views.home
     path('', views.home),
     # best practice to put trailing slash at the end of path
-    path('candy/', views.candy)
+    # need to reference name given in our form action
+    path('count/', views.count, name='count')
 ]
