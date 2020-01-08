@@ -43,6 +43,11 @@ def count(request):
     # pass fulltext to count page
     return render(request, 'count.html', {'fulltext':full_text, 'count': len(word_list),
                                           'sortedwords': sorted_words})
+
+
+def about(request):
+    return render(request, 'about.html')
+
 """
 Use templates to separate HTML code from view code
 """

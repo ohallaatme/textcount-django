@@ -21,8 +21,9 @@ from . import views
 urlpatterns = [
     # create views.py to send back information
     # if someone doesn't give us anything ('') after the homepage, we want to send them to views.home
-    path('', views.home),
+    path('', views.home, name='home'),
     # best practice to put trailing slash at the end of path
     # need to reference name given in our form action
-    path('count/', views.count, name='count')
+    path('count/', views.count, name='count'),
+    path('about/', views.about, name='about')
 ]
